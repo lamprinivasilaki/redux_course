@@ -40,7 +40,7 @@ const common = merge(
   },
   parts.indexTemplate({
     title: 'React - Redux Example',
-    appMountId: 'app'
+    appMountId: 'root'
   }),
   parts.loadJSX(PATHS.app),
   parts.lintJSX(PATHS.app)
