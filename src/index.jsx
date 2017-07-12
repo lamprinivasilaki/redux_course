@@ -1,50 +1,44 @@
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
-const toggleTodo = (todo) => {
-	// This way causes mutation, so it cannot be
-	// used with Redux
-	// todo.completed = ! todo.completed;
-	// return todo;
-
-	// This way works fine, there is a more efficient
-	// and effective way to achieve it.
-	// return {
-	// 	id: todo.id,
-	// 	text: todo.text,
-	// 	completed: !todo.completed
-	// };
-
-	// This way works perfectly, but we can do it
-	// using the ES7 object spread operator
-	// return Object.assign({}, todo, {
-	// 	completed: !todo.completed
-	// });
-
-	return {
-		...todo,
-		completed: !todo.completed
-	};
+const todos = (state = [], action) => {
+	switch (action.type) {
+		case 'ADD_TODO':
+			return [
+				...state,
+				{
+					id: action.id,
+					text: action.text,
+					completed: false
+				}
+			];
+		default:
+			return state;
+	}
 };
 
-const testToggleTodo = () => {
-	const todoBefore = {
+const testAddTodo = () => {
+	const stateBefore = [];
+	const action = {
+		type: 'ADD_TODO',
 		id: 0,
-		text: 'Learn Redux',
-		completed: false
+		text: 'Learn Redux'
 	};
-	const todoAfter = {
-		id: 0,
-		text: 'Learn Redux',
-		completed: true
-	};
+	const stateAfter = [
+		{
+			id: 0,
+			text: 'Learn Redux',
+			completed: false
+		}
+	];
 
-	deepFreeze(todoBefore);
+	deepFreeze(stateBefore);
+	deepFreeze(stateAfter);
 
 	expect(
-		toggleTodo(todoBefore)
-	).toEqual(todoAfter);
+		todos(stateBefore, action)
+	).toEqual(stateAfter);
 };
 
-testToggleTodo();
+testAddTodo();
 console.log('All tests passed.');
