@@ -1,6 +1,7 @@
-import {createStore} from 'redux';
-import {combineReducers} from 'redux';
-import React, {Component} from 'react';
+import { createStore } from 'redux';
+import { combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 const todo = (state, action) => {
@@ -261,17 +262,6 @@ const TodoApp = () => (
 		<Footer />
 	</div>
 );
-
-class Provider extends Component {
-	getChildContext() {
-		return {
-			store: this.props.store
-		};
-	}
-	render() {
-		return this.props.children;
-	}
-}
 
 Provider.childContextTypes = {
 	store: React.PropTypes.object
