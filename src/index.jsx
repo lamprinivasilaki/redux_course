@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 const todo = (state, action) => {
 	switch (action.type) {
@@ -113,7 +114,7 @@ class FilterLink extends Component {
 }
 
 FilterLink.contextTypes = {
-	store: React.PropTypes.object
+	store: PropTypes.object
 };
 
 const Footer = () => (
@@ -192,7 +193,7 @@ const AddTodo = ( props, {store} ) => {
 };
 
 AddTodo.contextTypes = {
-	store: React.PropTypes.object
+	store: PropTypes.object
 };
 
 const getVisibleTodos = (
@@ -250,7 +251,7 @@ class VisibleTodoList extends Component {
 }
 
 VisibleTodoList.contextTypes = {
-	store: React.PropTypes.object
+	store: PropTypes.object
 };
 
 let nextTodoId = 0;
@@ -264,7 +265,7 @@ const TodoApp = () => (
 );
 
 Provider.childContextTypes = {
-	store: React.PropTypes.object
+	store: PropTypes.object
 };
 
 ReactDOM.render (
